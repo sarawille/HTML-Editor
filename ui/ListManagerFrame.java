@@ -49,7 +49,7 @@ public class ListManagerFrame extends JDialog {
             System.out.println(e);
         }
         initComponents();
-//        setSize(768, 384);
+        setSize(768, 384);
         Toolkit tk = Toolkit.getDefaultToolkit();
 		Dimension dim = tk.getScreenSize();
 		int xPos = (dim.width / 2) - (this.getWidth() / 2);
