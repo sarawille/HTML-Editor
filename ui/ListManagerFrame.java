@@ -6,9 +6,11 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -16,6 +18,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 
 import business.Person;
@@ -37,7 +41,20 @@ public class ListManagerFrame extends JDialog {
             boolean modal, Person person) {
     	super(parent, title, modal);      
         this.activePerson = person;
+        try {
+            UIManager.setLookAndFeel(
+                    UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException |
+                 IllegalAccessException | UnsupportedLookAndFeelException e) {
+            System.out.println(e);
+        }
         initComponents();
+//        setSize(768, 384);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+		Dimension dim = tk.getScreenSize();
+		int xPos = (dim.width / 2) - (this.getWidth() / 2);
+		int yPos = (dim.height / 2) - (this.getHeight() / 2);
+		this.setLocation(xPos, yPos);
         
         add(buildButtonPanel(), BorderLayout.NORTH);
         listItemTable = buildProductTable();
@@ -52,10 +69,7 @@ public class ListManagerFrame extends JDialog {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);     
         
-        Dimension shortField = new Dimension(100, 20);
-        Dimension longField = new Dimension(300, 20);
-        textItems.setPreferredSize(shortField);
-        textItems.setMinimumSize(shortField);        
+        Dimension longField = new Dimension(300, 20);    
         
         cancelButton.setText("Cancel");
         cancelButton.addActionListener((ActionEvent) -> {
