@@ -134,7 +134,7 @@ public class ListManagerFrame extends JDialog {
     }    
     
     private JTable buildProductTable() {
-        listTableModel = new ListTableModel();
+        listTableModel = new ListTableModel(activePerson);
         JTable table = new JTable(listTableModel);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.setBorder(null);

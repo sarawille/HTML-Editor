@@ -16,8 +16,7 @@ import business.Person;
 
 public class PersonDB {
 	
-	public static List<ListItem> getListItems() throws XMLStreamException, DBException {
-		int personID = 1;
+	public static List<ListItem> getListItems(int personID) throws XMLStreamException, DBException {
 		String query = "SELECT * FROM ListItems WHERE PersonID = ?;";
 		List<ListItem> listItems = new ArrayList<>();
 		Connection connection = DBUtil.getConnection();

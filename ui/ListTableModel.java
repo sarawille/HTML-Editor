@@ -19,9 +19,10 @@ public class ListTableModel extends AbstractTableModel {
     };
 
     
-    public ListTableModel() {
+    public ListTableModel(Person activePerson) {
+    	this.activePerson = activePerson;
         try {
-            bullets = PersonDB.getListItems();
+            bullets = PersonDB.getListItems(activePerson.getPersonID());
         } catch (DBException | XMLStreamException e) {
             e.printStackTrace();
         }
@@ -33,7 +34,7 @@ public class ListTableModel extends AbstractTableModel {
     
     void databaseUpdated() {
         try {
-            bullets = PersonDB.getListItems();
+            bullets = PersonDB.getListItems(activePerson.getPersonID());
             fireTableDataChanged();
         } catch (DBException | XMLStreamException e) {
             e.printStackTrace();
