@@ -43,7 +43,6 @@ public class PageManagerFrame extends JFrame {
 		int xPos = (dim.width / 2) - (this.getWidth() / 2);
 		int yPos = (dim.height / 2) - (this.getHeight() / 2);
 		this.setLocation(xPos, yPos);
-//      setLocationByPlatform(true);
         setVisible(true);
 	}
 	
@@ -51,8 +50,6 @@ public class PageManagerFrame extends JFrame {
 		
 		JPanel thePanel = new JPanel();
 		thePanel.setLayout(new GridBagLayout());
-
-		this.setSize(400, 400);
 		
 		JRadioButton typeChoice1 = new JRadioButton();
 		typeChoice1.setText("Hero");
@@ -71,12 +68,17 @@ public class PageManagerFrame extends JFrame {
 		ButtonGroup typeGroup = new ButtonGroup();
 		typeGroup.add(typeChoice1);
 		typeGroup.add(typeChoice2);
-				
-		Dimension comboDim = new Dimension(120, 20);
+		
+		//big combo dimensions - for combo list
+		GridBagConstraints bc = new GridBagConstraints();
+		bc.fill = GridBagConstraints.HORIZONTAL;
+		bc.gridwidth = 4;   //2 columns wide
+		bc.insets = new Insets(5, 5, 0, 5);
+		bc.gridx = 0;
+		bc.gridy = 1;
+		bc.anchor = GridBagConstraints.CENTER;
 
 		personChoices = new JComboBox<String>();
-		personChoices.setPreferredSize(comboDim);
-		personChoices.setMinimumSize(comboDim);
 		populateDropdown();
 		personChoices.addActionListener((ActionEvent e) -> {
 			try {
@@ -88,16 +90,7 @@ public class PageManagerFrame extends JFrame {
 			}
 		});
 				
-		Dimension buttonDim = new Dimension(80, 20);
-//		Dimension buttonBig = new Dimension(320, 20);
-		
-		createButton = new JButton("HTML");
-//		createButton.setPreferredSize(buttonBig);
-		createButton.addActionListener((ActionEvent e) -> {
-			HTMLCreator program = new HTMLCreator();
-			program.runMain(type);
-			System.out.println("HTML generated for type " + type);
-		});
+		//big button dimensions - for HTML button
 		GridBagConstraints bb = new GridBagConstraints();
 		bb.fill = GridBagConstraints.HORIZONTAL;
 		bb.gridwidth = 4;   //2 columns wide
@@ -105,6 +98,15 @@ public class PageManagerFrame extends JFrame {
         bb.gridx = 0;
         bb.gridy = 4;
         bb.anchor = GridBagConstraints.CENTER;
+		
+		createButton = new JButton("HTML");
+		createButton.addActionListener((ActionEvent e) -> {
+			HTMLCreator program = new HTMLCreator();
+			program.runMain(type);
+			System.out.println("HTML generated for type " + type);
+		});
+		
+		Dimension buttonDim = new Dimension(80, 20);
 		
 		paraEditButton = new JButton("Edit");
 		paraEditButton.setPreferredSize(buttonDim);
@@ -120,7 +122,7 @@ public class PageManagerFrame extends JFrame {
 		
 		thePanel.add(typeChoice1, getConstraints(0, 0, GridBagConstraints.CENTER));
 		thePanel.add(typeChoice2, getConstraints(1, 0, GridBagConstraints.CENTER));
-		thePanel.add(personChoices, getConstraints(2, 0, GridBagConstraints.CENTER));
+		thePanel.add(personChoices, bc);
 		
 		thePanel.add(new JLabel("Paragraph"), getConstraints(0, 2, GridBagConstraints.WEST));
 		thePanel.add(paraEditButton, getConstraints(1, 2, GridBagConstraints.LINE_START));
@@ -131,8 +133,8 @@ public class PageManagerFrame extends JFrame {
 		thePanel.add(createButton, bb);
 		
 		this.add(thePanel);
+		pack();
 		
-		this.setVisible(true);
 	}
 
 //	private void addListItem(int personID) {
