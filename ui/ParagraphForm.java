@@ -60,11 +60,11 @@ public class ParagraphForm extends JDialog {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);     
         
         
-        Dimension longField = new Dimension(200, 200);
+        Dimension longField = new Dimension(400, 200);
      
         editField = new JTextArea();
-        editField.setPreferredSize(longField);
-        editField.setMinimumSize(longField);
+//        editField.setPreferredSize(longField);
+//        editField.setMinimumSize(longField);
         String setText = "";
         try {
         	setText = PersonDB.getParagraph(activePerson.getPersonID());
@@ -75,17 +75,17 @@ public class ParagraphForm extends JDialog {
         editField.setText(setText);
         editField.setLineWrap(true);	
         editField.setWrapStyleWord(true);	
-		JScrollPane scrollbar1 = new JScrollPane(editField, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);	
-		
+        JScrollPane scrollbar1 = new JScrollPane(editField, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollbar1.setPreferredSize(longField);
+        scrollbar1.setMinimumSize(longField);
 
-        // JLabel and JTextField panel
+        // JLabel and JTextArea panel
         JPanel personPanel = new JPanel();
         personPanel.setLayout(new GridBagLayout());
         String name = activePerson.getName();
         personPanel.add(new JLabel(name + ":"), 
-                getConstraints(0, 0, GridBagConstraints.LINE_END));
-        personPanel.add(editField,
-                getConstraints(1, 0, GridBagConstraints.LINE_START));
+                getConstraints(0, 0, GridBagConstraints.LINE_START));
+        personPanel.add(scrollbar1, getConstraints(0, 1, GridBagConstraints.LINE_START));
         
 
         // JButton panel
@@ -128,7 +128,7 @@ public class ParagraphForm extends JDialog {
     }
     
     private boolean validateData() {
-        if (editField.equals("")) {
+        if (editField.getText().equals("")) {
         	JOptionPane.showMessageDialog(this, "Please add text.",
 	            "Missing Fields", JOptionPane.INFORMATION_MESSAGE);
 	    return false;
@@ -137,34 +137,6 @@ public class ParagraphForm extends JDialog {
 		{
 			return true;
 		}
-	    }
-    
-//    private void setData() {
-//        String code = codeField.getText();
-//        String name = descriptionField.getText();
-//        String priceString = priceField.getText();
-//        double price = Double.parseDouble(priceString);
-//        product.setCode(code);
-//        product.setDescription(name);
-//        product.setPrice(price);
-//    }
-//    
-//    private void doEdit() {
-//        try {
-//            PersonDB.update(activePerson);
-//            dispose();
-//        } catch (DBException e) {
-//            System.out.println(e);
-//        }
-//    }
-//    
-//    private void doAdd() {
-//        try {
-//            PersonDB.add(activePerson);
-//            dispose();
-//        } catch(DBException e) {
-//            System.out.println(e);
-//        }
-//    }
+	}
 
 }
