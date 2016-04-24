@@ -163,7 +163,7 @@ public class HTMLCreator {
 	public static void writeList(int personID) throws XMLStreamException {
 		ArrayList<String> listItems = new ArrayList<>();
 		try {
-			listItems = PersonDB.setListItems(personID);
+			listItems = PersonDB.getListItems(personID);
 		} 
 		catch (DBException e) 
 		{
