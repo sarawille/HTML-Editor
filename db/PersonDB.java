@@ -139,19 +139,32 @@ public class PersonDB {
 	}
 	
 
-	public static void addList(int personID, String textToAdd) throws DBException {
+	public static void addList(int personID, String text) throws DBException {
 		String query = "INSERT INTO ListItems (PersonID, Text) " + 
 						"VALUES (?, ?);";
 
 		Connection connection = DBUtil.getConnection();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, personID);
-            ps.setString(2, textToAdd);
+            ps.setString(2, text);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new DBException(e);
+        }	
+	}
+	
+
+	public static void updateList(int personID, String text) throws DBException {
+		String query = "UPDATE ListItems SET Text = ? WHERE PersonID = ?;";
+
+		Connection connection = DBUtil.getConnection();
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, text);
+            ps.setInt(2, personID);
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new DBException(e);
         } 
-		
 	}
 	
 	public static String setHeading(int type) throws DBException, XMLStreamException {
@@ -189,6 +202,7 @@ public class PersonDB {
 			throw new DBException();
 		}
 	}
+
 
 	
 	
