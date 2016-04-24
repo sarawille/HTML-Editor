@@ -195,34 +195,6 @@ public class PageManagerFrame extends JFrame {
         return c;
     }
 	
-//	private JTable buildPersonTable() {
-//        personTableModel = new ProductTableModel(type);
-//        JTable table = new JTable(personTableModel);
-//        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-//        table.setBorder(null);
-//        return table;
-//    }  
-
-//	private ArrayList<String> getItemsForList() throws DBException {
-//		ArrayList<String> dropDownItems = new ArrayList<>();
-//		String query = "SELECT PersonName FROM Person WHERE TypeID = ?";
-//		
-//		Connection connection = DBUtil.getConnection();
-//		try (PreparedStatement ps = connection.prepareStatement(query))
-//		{
-//			ps.setInt(1, type);
-//			ResultSet rs = ps.executeQuery();
-//			while(rs.next()) {
-//				String name = rs.getString("PersonName");
-//				dropDownItems.add(name);
-//			}
-//			return dropDownItems;
-//		}
-//		catch (SQLException e)
-//		{
-//			throw new DBException();
-//		}
-//	}
 	
 	
 }
