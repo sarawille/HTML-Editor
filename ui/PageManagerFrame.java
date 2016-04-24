@@ -21,6 +21,7 @@ public class PageManagerFrame extends JFrame {
 	JTextArea textArea1;
 	JComboBox<String> personChoices;
 	JRadioButton type1, type2;
+//	ProductTableModel personTableModel;
 	static int type;
 	Person activePerson;
 	String userChoice = "";
@@ -42,6 +43,7 @@ public class PageManagerFrame extends JFrame {
 		int xPos = (dim.width / 2) - (this.getWidth() / 2);
 		int yPos = (dim.height / 2) - (this.getHeight() / 2);
 		this.setLocation(xPos, yPos);
+//      setLocationByPlatform(true);
         setVisible(true);
 	}
 	
@@ -86,9 +88,11 @@ public class PageManagerFrame extends JFrame {
 			}
 		});
 				
-		Dimension buttonDim = new Dimension(120, 20);
+		Dimension buttonDim = new Dimension(80, 20);
+//		Dimension buttonBig = new Dimension(320, 20);
 		
 		createButton = new JButton("HTML");
+//		createButton.setPreferredSize(buttonBig);
 		createButton.addActionListener((ActionEvent e) -> {
 			HTMLCreator program = new HTMLCreator();
 			program.runMain(type);
@@ -136,6 +140,7 @@ public class PageManagerFrame extends JFrame {
 		thePanel.add(new JLabel("List Items"), getConstraints(0, 3, GridBagConstraints.WEST));
 		thePanel.add(listEditButton, getConstraints(1, 3, GridBagConstraints.LINE_START));
 		thePanel.add(listAddButton, getConstraints(2, 3, GridBagConstraints.LINE_START));
+//		thePanel.add(listDeleteButton, getConstraints(3, 3, GridBagConstraints.LINE_START));
 		
 		thePanel.add(createButton, bb);
 		
@@ -186,6 +191,13 @@ public class PageManagerFrame extends JFrame {
 		}
 	}
 
+	private void add() {
+//    	ProductForm showPeople = new ProductForm(this, "List Items", true);
+//    	listEditForm.setLocationRelativeTo(this);
+//    	listEditForm.setVisible(true);
+//		
+	}
+
 	private GridBagConstraints getConstraints(int x, int y, int anchor) {
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(5, 5, 0, 5);
@@ -195,6 +207,34 @@ public class PageManagerFrame extends JFrame {
         return c;
     }
 	
+//	private JTable buildPersonTable() {
+//        personTableModel = new ProductTableModel(type);
+//        JTable table = new JTable(personTableModel);
+//        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//        table.setBorder(null);
+//        return table;
+//    }  
+
+//	private ArrayList<String> getItemsForList() throws DBException {
+//		ArrayList<String> dropDownItems = new ArrayList<>();
+//		String query = "SELECT PersonName FROM Person WHERE TypeID = ?";
+//		
+//		Connection connection = DBUtil.getConnection();
+//		try (PreparedStatement ps = connection.prepareStatement(query))
+//		{
+//			ps.setInt(1, type);
+//			ResultSet rs = ps.executeQuery();
+//			while(rs.next()) {
+//				String name = rs.getString("PersonName");
+//				dropDownItems.add(name);
+//			}
+//			return dropDownItems;
+//		}
+//		catch (SQLException e)
+//		{
+//			throw new DBException();
+//		}
+//	}
 	
 	
 }
