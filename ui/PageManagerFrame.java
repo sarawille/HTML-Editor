@@ -1,15 +1,12 @@
 package ui;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.sql.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
-import javax.xml.stream.XMLStreamException;
 
 import ui.ParagraphForm;
 import db.DBException;
-import db.DBUtil;
 import db.PersonDB;
 import business.HTMLCreator;
 import business.Person;
@@ -135,19 +132,6 @@ public class PageManagerFrame extends JFrame {
 		
 	}
 
-//	private void addListItem(int personID) {
-//		if (personID == 0) {
-//            JOptionPane.showMessageDialog(this,
-//                    "No item is currently selected.", 
-//                    "No item selected", JOptionPane.ERROR_MESSAGE);
-//        } else {
-//            AddListItemForm addListItemForm = 
-//                    new AddListItemForm(this, "Add List Item", true, activePerson);
-//            addListItemForm.setLocationRelativeTo(this);
-//            addListItemForm.setVisible(true);
-//        }		
-//	}
-
 	private void editParagraph(int personID) {
         if (personID == 0) {
             JOptionPane.showMessageDialog(this,
@@ -177,13 +161,6 @@ public class PageManagerFrame extends JFrame {
 		}
 	}
 
-	private void add() {
-//    	ProductForm showPeople = new ProductForm(this, "List Items", true);
-//    	listEditForm.setLocationRelativeTo(this);
-//    	listEditForm.setVisible(true);
-//		
-	}
-
 	private GridBagConstraints getConstraints(int x, int y, int anchor) {
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(5, 5, 0, 5);
@@ -192,35 +169,5 @@ public class PageManagerFrame extends JFrame {
         c.anchor = anchor;
         return c;
     }
-	
-//	private JTable buildPersonTable() {
-//        personTableModel = new ProductTableModel(type);
-//        JTable table = new JTable(personTableModel);
-//        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-//        table.setBorder(null);
-//        return table;
-//    }  
-
-//	private ArrayList<String> getItemsForList() throws DBException {
-//		ArrayList<String> dropDownItems = new ArrayList<>();
-//		String query = "SELECT PersonName FROM Person WHERE TypeID = ?";
-//		
-//		Connection connection = DBUtil.getConnection();
-//		try (PreparedStatement ps = connection.prepareStatement(query))
-//		{
-//			ps.setInt(1, type);
-//			ResultSet rs = ps.executeQuery();
-//			while(rs.next()) {
-//				String name = rs.getString("PersonName");
-//				dropDownItems.add(name);
-//			}
-//			return dropDownItems;
-//		}
-//		catch (SQLException e)
-//		{
-//			throw new DBException();
-//		}
-//	}
-	
-	
+		
 }

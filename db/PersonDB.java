@@ -32,7 +32,6 @@ public class PersonDB {
 				bullet.setRow(row);
 				bullet.setText(text);
 				bullet.setPersonID(personID);
-				System.out.println(text);
 				listItems.add(bullet);
 			}
 		}
