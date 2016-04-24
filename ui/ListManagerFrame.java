@@ -22,6 +22,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 
+import ui.EditListItemForm;
 import business.Person;
 import db.DBException;
 import db.PersonDB;
@@ -91,7 +92,7 @@ public class ListManagerFrame extends JDialog {
         JButton editButton = new JButton("Edit");
         editButton.setToolTipText("Edit selected product");
         editButton.addActionListener((ActionEvent) -> {
-//            doEditButton();
+            doEditButton();
         });
         panel.add(editButton);
         
@@ -112,7 +113,22 @@ public class ListManagerFrame extends JDialog {
         return panel;
     }
     
-    private void doAddButton() {
+    private void doEditButton() {
+    	int selectedRow = listItemTable.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this,
+                    "No product is currently selected.", 
+                    "No product selected", JOptionPane.ERROR_MESSAGE);
+        } else {
+            String text = listTableModel.getText(selectedRow);
+            EditListItemForm editListItemForm = 
+                    new EditListItemForm(this, "Edit List", true, text);
+            editListItemForm.setLocationRelativeTo(this);
+            editListItemForm.setVisible(true);
+        }
+	}
+
+	private void doAddButton() {
 		AddListItemForm addListItemForm = 
 	                new AddListItemForm(this, "Add List Item", true, activePerson);
         addListItemForm.setLocationRelativeTo(this);
