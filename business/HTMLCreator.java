@@ -146,20 +146,18 @@ public class HTMLCreator {
 	}
 	
 	private static void writeParagraphs(int personID) throws XMLStreamException {
-		ArrayList<String> paragraphs = new ArrayList<>();
+		String paragraph = "";
 		try {
-			paragraphs = PersonDB.setParagraph(personID);
+			paragraph = PersonDB.getParagraph(personID);
 		} 
 		catch (DBException e) 
 		{
 			e.printStackTrace();
 		}
-		for (String para : paragraphs){
-			writer.writeStartElement("p");
-			writer.writeCharacters(para);
-			writeCloseTags();
-			writer.writeCharacters("\n");
-		}
+		writer.writeStartElement("p");
+		writer.writeCharacters(paragraph);
+		writeCloseTags();
+		writer.writeCharacters("\n");
 	}
 	
 	public static void writeList(int personID) throws XMLStreamException {
