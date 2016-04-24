@@ -112,6 +112,7 @@ public class AddListItemForm extends JDialog {
         	  int personID = activePerson.getPersonID();
 	          PersonDB.addList(personID, textToAdd);
 	          dispose();
+	          fireDatabaseUpdatedEvent();
 	      } catch (DBException e) {
 	          e.printStackTrace();
 	      } 
