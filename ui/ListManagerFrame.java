@@ -63,7 +63,6 @@ public class ListManagerFrame extends JDialog {
     }
 
     private void initComponents() {
-        textItems = new JTextField();
         cancelButton = new JButton();
         confirmButton = new JButton();
 
@@ -81,14 +80,6 @@ public class ListManagerFrame extends JDialog {
 //            confirmButtonActionPerformed();
         });
 
-        // JLabel and JTextField panel
-        JPanel productPanel = new JPanel();
-        productPanel.setLayout(new GridBagLayout());
-        productPanel.add(new JLabel("Code:"), 
-                getConstraints(0, 0, GridBagConstraints.LINE_END));
-        productPanel.add(textItems,
-                getConstraints(1, 0, GridBagConstraints.LINE_START));
-
         // JButton panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -97,7 +88,6 @@ public class ListManagerFrame extends JDialog {
 
         // add panels to main panel
         setLayout(new BorderLayout());
-        add(productPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
         pack();        
     }
