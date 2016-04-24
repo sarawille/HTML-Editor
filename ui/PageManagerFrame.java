@@ -88,8 +88,8 @@ public class PageManagerFrame extends JFrame {
 			}
 		});
 				
-		Dimension buttonDim = new Dimension(80, 20);
-//		Dimension buttonBig = new Dimension(320, 20);
+		Dimension buttonDim = new Dimension(120, 20);
+//		Dimension buttonBig = new Dimension(20, 20);
 		
 		createButton = new JButton("HTML");
 //		createButton.setPreferredSize(buttonBig);
