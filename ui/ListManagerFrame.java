@@ -27,9 +27,7 @@ import ui.ListTableModel;
 public class ListManagerFrame extends JDialog {
 	private JTable listItemTable;
 	private ListTableModel listTableModel;
-    private JTextField codeField;
-    private JTextField descriptionField;
-    private JTextField priceField;
+    private JTextField textItems;
     private JButton confirmButton;
     private JButton cancelButton;
 
@@ -48,9 +46,7 @@ public class ListManagerFrame extends JDialog {
     }
 
     private void initComponents() {
-        codeField = new JTextField();
-        descriptionField = new JTextField();
-        priceField = new JTextField();
+        textItems = new JTextField();
         cancelButton = new JButton();
         confirmButton = new JButton();
 
@@ -58,12 +54,8 @@ public class ListManagerFrame extends JDialog {
         
         Dimension shortField = new Dimension(100, 20);
         Dimension longField = new Dimension(300, 20);
-        codeField.setPreferredSize(shortField);
-        codeField.setMinimumSize(shortField);        
-        priceField.setPreferredSize(shortField);
-        priceField.setMinimumSize(shortField);        
-        descriptionField.setPreferredSize(longField);
-        descriptionField.setMinimumSize(longField);
+        textItems.setPreferredSize(shortField);
+        textItems.setMinimumSize(shortField);        
         
         cancelButton.setText("Cancel");
         cancelButton.addActionListener((ActionEvent) -> {
@@ -80,16 +72,8 @@ public class ListManagerFrame extends JDialog {
         productPanel.setLayout(new GridBagLayout());
         productPanel.add(new JLabel("Code:"), 
                 getConstraints(0, 0, GridBagConstraints.LINE_END));
-        productPanel.add(codeField,
+        productPanel.add(textItems,
                 getConstraints(1, 0, GridBagConstraints.LINE_START));
-        productPanel.add(new JLabel("Description:"), 
-                getConstraints(0, 1, GridBagConstraints.LINE_END));
-        productPanel.add(descriptionField, 
-                getConstraints(1, 1, GridBagConstraints.LINE_START));
-        productPanel.add(new JLabel("Price:"), 
-                getConstraints(0, 2, GridBagConstraints.LINE_END));
-        productPanel.add(priceField, 
-                getConstraints(1, 2, GridBagConstraints.LINE_START));
 
         // JButton panel
         JPanel buttonPanel = new JPanel();

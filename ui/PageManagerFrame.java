@@ -115,7 +115,7 @@ public class PageManagerFrame extends JFrame {
 		listEditButton = new JButton("Edit");
 		listEditButton.setPreferredSize(buttonDim);
 		listEditButton.addActionListener((ActionEvent e) -> {
-			System.out.println("Button clicked!");
+			new ListManagerFrame(this, "Edit List", true, activePerson);
 		});
 		
 		listAddButton = new JButton("Add");
