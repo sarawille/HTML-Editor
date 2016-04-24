@@ -118,18 +118,6 @@ public class PageManagerFrame extends JFrame {
 			new ListManagerFrame(this, "Edit List", true, activePerson);
 		});
 		
-		listAddButton = new JButton("Add");
-		listAddButton.setPreferredSize(buttonDim);
-		listAddButton.addActionListener((ActionEvent e) -> {
-			addListItem(activePerson.getPersonID());
-		});
-		
-		listDeleteButton = new JButton("Delete");
-		listDeleteButton.setPreferredSize(buttonDim);
-		listDeleteButton.addActionListener((ActionEvent e) -> {
-			System.out.println("Button clicked!");
-		});
-		
 		thePanel.add(typeChoice1, getConstraints(0, 0, GridBagConstraints.CENTER));
 		thePanel.add(typeChoice2, getConstraints(1, 0, GridBagConstraints.CENTER));
 		thePanel.add(personChoices, getConstraints(2, 0, GridBagConstraints.CENTER));
@@ -139,8 +127,6 @@ public class PageManagerFrame extends JFrame {
 		
 		thePanel.add(new JLabel("List Items"), getConstraints(0, 3, GridBagConstraints.WEST));
 		thePanel.add(listEditButton, getConstraints(1, 3, GridBagConstraints.LINE_START));
-		thePanel.add(listAddButton, getConstraints(2, 3, GridBagConstraints.LINE_START));
-//		thePanel.add(listDeleteButton, getConstraints(3, 3, GridBagConstraints.LINE_START));
 		
 		thePanel.add(createButton, bb);
 		
@@ -149,18 +135,18 @@ public class PageManagerFrame extends JFrame {
 		this.setVisible(true);
 	}
 
-	private void addListItem(int personID) {
-		if (personID == 0) {
-            JOptionPane.showMessageDialog(this,
-                    "No item is currently selected.", 
-                    "No item selected", JOptionPane.ERROR_MESSAGE);
-        } else {
-            AddListItemForm addListItemForm = 
-                    new AddListItemForm(this, "Add List Item", true, activePerson);
-            addListItemForm.setLocationRelativeTo(this);
-            addListItemForm.setVisible(true);
-        }		
-	}
+//	private void addListItem(int personID) {
+//		if (personID == 0) {
+//            JOptionPane.showMessageDialog(this,
+//                    "No item is currently selected.", 
+//                    "No item selected", JOptionPane.ERROR_MESSAGE);
+//        } else {
+//            AddListItemForm addListItemForm = 
+//                    new AddListItemForm(this, "Add List Item", true, activePerson);
+//            addListItemForm.setLocationRelativeTo(this);
+//            addListItemForm.setVisible(true);
+//        }		
+//	}
 
 	private void editParagraph(int personID) {
         if (personID == 0) {

@@ -48,13 +48,8 @@ public class ListManagerFrame extends JDialog {
                  IllegalAccessException | UnsupportedLookAndFeelException e) {
             System.out.println(e);
         }
-        initComponents();
         setSize(768, 384);
-        Toolkit tk = Toolkit.getDefaultToolkit();
-		Dimension dim = tk.getScreenSize();
-		int xPos = (dim.width / 2) - (this.getWidth() / 2);
-		int yPos = (dim.height / 2) - (this.getHeight() / 2);
-		this.setLocation(xPos, yPos);
+        setPosition();
         
         add(buildButtonPanel(), BorderLayout.NORTH);
         listItemTable = buildProductTable();
@@ -62,35 +57,13 @@ public class ListManagerFrame extends JDialog {
         setVisible(true);
     }
 
-    private void initComponents() {
-        cancelButton = new JButton();
-        confirmButton = new JButton();
-
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);     
-        
-        Dimension longField = new Dimension(300, 20);    
-        
-        cancelButton.setText("Cancel");
-        cancelButton.addActionListener((ActionEvent) -> {
-            cancelButtonActionPerformed();
-        });
-
-        confirmButton.setText("Add");
-        confirmButton.addActionListener((ActionEvent) -> {
-//            confirmButtonActionPerformed();
-        });
-
-        // JButton panel
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        buttonPanel.add(confirmButton);
-        buttonPanel.add(cancelButton);
-
-        // add panels to main panel
-        setLayout(new BorderLayout());
-        add(buttonPanel, BorderLayout.SOUTH);
-        pack();        
-    }
+	private void setPosition() {
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Dimension dim = tk.getScreenSize();
+		int xPos = (dim.width / 2) - (this.getWidth() / 2);
+		int yPos = (dim.height / 2) - (this.getHeight() / 2);
+		this.setLocation(xPos, yPos);
+	}
     
     private GridBagConstraints getConstraints(int x, int y, int anchor) {
         GridBagConstraints c = new GridBagConstraints();
@@ -111,7 +84,7 @@ public class ListManagerFrame extends JDialog {
         JButton addButton = new JButton("Add");
         addButton.setToolTipText("Add product");
         addButton.addActionListener((ActionEvent) -> {
-//            doAddButton();
+            doAddButton();
         });
         panel.add(addButton);
         
@@ -132,7 +105,14 @@ public class ListManagerFrame extends JDialog {
         return panel;
     }
     
-    void fireDatabaseUpdatedEvent() {
+    private void doAddButton() {
+		AddListItemForm addListItemForm = 
+	                new AddListItemForm(this, "Add List Item", true, activePerson);
+        addListItemForm.setLocationRelativeTo(this);
+        addListItemForm.setVisible(true);	
+	}
+
+	void fireDatabaseUpdatedEvent() {
         listTableModel.databaseUpdated();
     }    
     

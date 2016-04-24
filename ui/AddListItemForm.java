@@ -15,9 +15,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import ui.ListManagerFrame;
 import db.PersonDB;
 import business.Person;
 import db.DBException;
@@ -30,9 +30,9 @@ public class AddListItemForm extends JDialog {
 
     private Person activePerson = new Person();
     
-    public AddListItemForm(java.awt.Frame parent, String title,
+    public AddListItemForm(ListManagerFrame listManagerFrame, String title,
             boolean modal, Person person) {
-    	super(parent, title, modal);      
+    	super(listManagerFrame, title, modal);      
         this.activePerson = person;
         initComponents();
     }
@@ -129,5 +129,10 @@ public class AddListItemForm extends JDialog {
 			return true;
 		}
 	}
+    
+    void fireDatabaseUpdatedEvent() {
+    	ListManagerFrame mainWindow = (ListManagerFrame) getOwner();
+        mainWindow.fireDatabaseUpdatedEvent();
+    }    
 
 }
