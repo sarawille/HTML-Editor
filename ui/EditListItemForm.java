@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.WindowConstants;
 
+import business.ListItem;
 import business.Person;
 import db.DBException;
 import db.PersonDB;
@@ -30,12 +31,12 @@ public class EditListItemForm extends JDialog {
 	private JTextArea editField;
     private JButton confirmButton, cancelButton;
 
-    String text = "";
+    ListItem bullet;
     
     public EditListItemForm(ListManagerFrame parent, String title,
-            boolean modal, String bullet) {
+            boolean modal, ListItem bullet) {
     	super(parent, title, modal);      
-        this.text = bullet;
+        this.bullet = bullet;
         initComponents();
     }
 
@@ -48,7 +49,7 @@ public class EditListItemForm extends JDialog {
         confirmButton.setPreferredSize(buttonDim);
         confirmButton.setMinimumSize(buttonDim);
         confirmButton.addActionListener((ActionEvent e) -> {
-//        	confirmButtonActionPerformed();
+        	confirmButtonActionPerformed();
         });
         
         cancelButton = new JButton();
@@ -56,7 +57,7 @@ public class EditListItemForm extends JDialog {
         cancelButton.setPreferredSize(buttonDim);
         cancelButton.setMinimumSize(buttonDim);
         cancelButton.addActionListener((ActionEvent e) -> {
-        	cancelButtonActionPerformed();
+        	dispose();
         });
 
 		
@@ -68,7 +69,7 @@ public class EditListItemForm extends JDialog {
         editField = new JTextArea();
         editField.setPreferredSize(longField);
         editField.setMinimumSize(longField);
-        editField.setText(text);
+        editField.setText(bullet.getText());
         editField.setLineWrap(true);	
         editField.setWrapStyleWord(true);	
 
@@ -102,24 +103,21 @@ public class EditListItemForm extends JDialog {
         c.anchor = anchor;
         return c;
     }
+                                           
 
-    private void cancelButtonActionPerformed() {                                             
-        dispose();
-    }                                            
-
-//    private void confirmButtonActionPerformed() {
-//        if (validateData()) {
-//          try {
-//        	  String textToUpdate = editField.getText();
-//        	  int personID = activePerson.getPersonID();
-//	          PersonDB.updateList(personID, textToUpdate);
-//	          dispose();
-//	          fireDatabaseUpdatedEvent();
-//	      } catch (DBException e) {
-//	          e.printStackTrace();
-//	      } 
-//        }
-//    }
+    private void confirmButtonActionPerformed() {
+        if (validateData()) {
+          try {
+        	  String textToUpdate = editField.getText();
+        	  int rowNum = bullet.getRow();
+	          PersonDB.updateList(rowNum, textToUpdate);
+	          dispose();
+	          fireDatabaseUpdatedEvent();
+	      } catch (DBException e) {
+	          e.printStackTrace();
+	      } 
+        }
+    }
     
     private boolean validateData() {
         if (editField.getText().equals("")) {

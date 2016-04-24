@@ -28,7 +28,7 @@ public class ListTableModel extends AbstractTableModel {
         }
     }
     
-    ListItem getText(int rowIndex) {
+    ListItem getItem(int rowIndex) {
         return bullets.get(rowIndex);
     }
     

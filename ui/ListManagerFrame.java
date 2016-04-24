@@ -23,6 +23,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 
 import ui.EditListItemForm;
+import business.ListItem;
 import business.Person;
 import db.DBException;
 import db.PersonDB;
@@ -114,9 +115,9 @@ public class ListManagerFrame extends JDialog {
                     "No product is currently selected.", 
                     "No product selected", JOptionPane.ERROR_MESSAGE);
         } else {
-            String text = listTableModel.getText(selectedRow).getText();
+            ListItem bullet = listTableModel.getItem(selectedRow);
             EditListItemForm editListItemForm = 
-                    new EditListItemForm(this, "Edit List", true, text);
+                    new EditListItemForm(this, "Edit List", true, bullet);
             editListItemForm.setLocationRelativeTo(this);
             editListItemForm.setVisible(true);
         }

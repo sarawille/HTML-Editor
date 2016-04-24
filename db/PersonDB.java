@@ -161,13 +161,13 @@ public class PersonDB {
 	}
 	
 
-	public static void updateList(String originalText, String newText) throws DBException {
-		String query = "UPDATE ListItems SET Text = ? WHERE Text = ?;";
+	public static void updateList(int row, String text) throws DBException {
+		String query = "UPDATE ListItems SET Text = ? WHERE RowNum = ?;";
 
 		Connection connection = DBUtil.getConnection();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, newText);
-            ps.setString(2, originalText);
+            ps.setString(1, text);
+            ps.setInt(2, row);
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new DBException(e);
