@@ -102,6 +102,13 @@ public class ListManagerFrame extends JDialog {
         });
         panel.add(deleteButton);
         
+        JButton exitButton = new JButton("Exit");
+        exitButton.setToolTipText("Exit table view");
+        exitButton.addActionListener((ActionEvent) -> {
+            dispose();
+        });
+        panel.add(exitButton);
+        
         return panel;
     }
     
