@@ -32,9 +32,6 @@ import ui.ListTableModel;
 public class ListManagerFrame extends JDialog {
 	private JTable listItemTable;
 	private ListTableModel listTableModel;
-    private JTextField textItems;
-    private JButton confirmButton;
-    private JButton cancelButton;
 
     private Person activePerson = new Person();
     
@@ -74,10 +71,7 @@ public class ListManagerFrame extends JDialog {
         c.anchor = anchor;
         return c;
     }
-
-    private void cancelButtonActionPerformed() {                                             
-        dispose();
-    }                                            
+                                       
     
     private JPanel buildButtonPanel() {
         JPanel panel = new JPanel();
@@ -120,7 +114,7 @@ public class ListManagerFrame extends JDialog {
                     "No product is currently selected.", 
                     "No product selected", JOptionPane.ERROR_MESSAGE);
         } else {
-            String text = listTableModel.getText(selectedRow);
+            String text = listTableModel.getText(selectedRow).getText();
             EditListItemForm editListItemForm = 
                     new EditListItemForm(this, "Edit List", true, text);
             editListItemForm.setLocationRelativeTo(this);
@@ -140,7 +134,7 @@ public class ListManagerFrame extends JDialog {
     }    
     
     private JTable buildProductTable() {
-        listTableModel = new ListTableModel(activePerson);
+        listTableModel = new ListTableModel();
         JTable table = new JTable(listTableModel);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.setBorder(null);

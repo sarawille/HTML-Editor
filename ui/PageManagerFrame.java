@@ -85,9 +85,7 @@ public class PageManagerFrame extends JFrame {
 				Object selectedItem = personChoices.getSelectedItem();
 				String choice = selectedItem.toString();
 				activePerson = PersonDB.getPerson(choice);
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
+			} catch (Exception e1) {}
 		});
 				
 		//big button dimensions - for HTML button

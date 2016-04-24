@@ -5,19 +5,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.stream.XMLStreamException;
 
 import db.DBException;
 import db.DBUtil;
+import business.ListItem;
 import business.Person;
 
 public class PersonDB {
 	
-	public static ArrayList<String> getListItems(int personID) throws XMLStreamException, DBException {
-		ArrayList<String> listItems = new ArrayList<>();
+	public static List<ListItem> getListItems() throws XMLStreamException, DBException {
+		int personID = 1;
 		String query = "SELECT * FROM ListItems WHERE PersonID = ?;";
-		
+		List<ListItem> listItems = new ArrayList<>();
 		Connection connection = DBUtil.getConnection();
 		try (PreparedStatement statement = connection.prepareStatement(query))
 		{
@@ -25,7 +27,13 @@ public class PersonDB {
 			ResultSet rs = statement.executeQuery();
 			while(rs.next())
 			{
-				String bullet = rs.getString("Text");
+				int row = rs.getInt("RowNum");
+				String text = rs.getString("Text");
+				ListItem bullet = new ListItem();
+				bullet.setRow(row);
+				bullet.setText(text);
+				bullet.setPersonID(personID);
+				System.out.println(text);
 				listItems.add(bullet);
 			}
 		}
@@ -35,7 +43,7 @@ public class PersonDB {
 		}
 		return listItems;
 	}
-
+	
 	public static String getParagraph(int personID) throws DBException {
 		String para = "";
 		String query = "SELECT * FROM Paragraph WHERE PersonID = ?;";
@@ -154,13 +162,13 @@ public class PersonDB {
 	}
 	
 
-	public static void updateList(int personID, String text) throws DBException {
-		String query = "UPDATE ListItems SET Text = ? WHERE PersonID = ?;";
+	public static void updateList(String originalText, String newText) throws DBException {
+		String query = "UPDATE ListItems SET Text = ? WHERE Text = ?;";
 
 		Connection connection = DBUtil.getConnection();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, text);
-            ps.setInt(2, personID);
+            ps.setString(1, newText);
+            ps.setString(2, originalText);
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new DBException(e);
