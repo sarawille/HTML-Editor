@@ -104,24 +104,6 @@ public class PersonDB {
 			throw new DBException();
 		}
 	}
-	
-//	public static int getPersonID(String name) throws DBException
-//	{
-//		ArrayList<Person> people = new ArrayList<>();
-//		String query = "SELECT PersonID FROM Person WHERE PersonName = ?;";
-//		Connection connection = DBUtil.getConnection();
-//		try (PreparedStatement statement = connection.prepareStatement(query)) 
-//		{
-//			statement.setString(1,  name);
-//			ResultSet rs = statement.executeQuery();
-//			rs.next();
-//			int personID = rs.getInt("PersonID");
-//			return personID;
-//		} 
-//		catch (SQLException e) {
-//			throw new DBException();
-//		}
-//	}
 
 	public static String getPersonInfo(int personID) throws DBException {
 		String query = "SELECT Paragraph.Text FROM Person " +
@@ -155,6 +137,22 @@ public class PersonDB {
         } catch (SQLException e) {
             throw new DBException(e);
         } 
+	}
+	
+
+	public static void addList(int personID, String textToAdd) throws DBException {
+		String query = "INSERT INTO ListItems (PersonID, Text) " + 
+						"VALUES (?, ?);";
+
+		Connection connection = DBUtil.getConnection();
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, personID);
+            ps.setString(2, textToAdd);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new DBException(e);
+        } 
+		
 	}
 	
 	public static String setHeading(int type) throws DBException, XMLStreamException {
@@ -192,6 +190,7 @@ public class PersonDB {
 			throw new DBException();
 		}
 	}
+
 	
 	
 }

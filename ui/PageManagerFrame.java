@@ -114,19 +114,19 @@ public class PageManagerFrame extends JFrame {
 		
 		listEditButton = new JButton("Edit");
 		listEditButton.setPreferredSize(buttonDim);
-		paraEditButton.addActionListener((ActionEvent e) -> {
+		listEditButton.addActionListener((ActionEvent e) -> {
 			System.out.println("Button clicked!");
 		});
 		
 		listAddButton = new JButton("Add");
 		listAddButton.setPreferredSize(buttonDim);
-		paraEditButton.addActionListener((ActionEvent e) -> {
-			System.out.println("Button clicked!");
+		listAddButton.addActionListener((ActionEvent e) -> {
+			addListItem(activePerson.getPersonID());
 		});
 		
 		listDeleteButton = new JButton("Delete");
 		listDeleteButton.setPreferredSize(buttonDim);
-		paraEditButton.addActionListener((ActionEvent e) -> {
+		listDeleteButton.addActionListener((ActionEvent e) -> {
 			System.out.println("Button clicked!");
 		});
 		
@@ -149,8 +149,20 @@ public class PageManagerFrame extends JFrame {
 		this.setVisible(true);
 	}
 
+	private void addListItem(int personID) {
+		if (personID == 0) {
+            JOptionPane.showMessageDialog(this,
+                    "No item is currently selected.", 
+                    "No item selected", JOptionPane.ERROR_MESSAGE);
+        } else {
+            AddListItemForm addListItemForm = 
+                    new AddListItemForm(this, "Add List Item", true, activePerson);
+            addListItemForm.setLocationRelativeTo(this);
+            addListItemForm.setVisible(true);
+        }		
+	}
+
 	private void editParagraph(int personID) {
-		System.out.println(activePerson.getName() + " " + activePerson.getPersonID());
         if (personID == 0) {
             JOptionPane.showMessageDialog(this,
                     "No item is currently selected.", 
@@ -161,7 +173,6 @@ public class PageManagerFrame extends JFrame {
             paraForm.setLocationRelativeTo(this);
             paraForm.setVisible(true);
         }
-		
 	}
 
 	private void populateDropdown() {

@@ -24,13 +24,13 @@ import db.DBException;
 
 
 @SuppressWarnings("serial")
-public class ParagraphForm extends JDialog {
+public class AddListItemForm extends JDialog {
     private JTextArea editField;
     private JButton confirmButton, cancelButton;
 
     private Person activePerson = new Person();
     
-    public ParagraphForm(java.awt.Frame parent, String title,
+    public AddListItemForm(java.awt.Frame parent, String title,
             boolean modal, Person person) {
     	super(parent, title, modal);      
         this.activePerson = person;
@@ -60,17 +60,10 @@ public class ParagraphForm extends JDialog {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);     
         
         
-        Dimension longField = new Dimension(400, 200);
+        Dimension longField = new Dimension(200, 100);
      
         editField = new JTextArea();
-        String setText = "";
-        try {
-        	setText = PersonDB.getParagraph(activePerson.getPersonID());
-        }
-        catch (DBException e) {
-        	e.printStackTrace();
-        }
-        editField.setText(setText);
+        editField.setText("");
         editField.setLineWrap(true);	
         editField.setWrapStyleWord(true);	
         JScrollPane scrollbar1 = new JScrollPane(editField, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -115,9 +108,9 @@ public class ParagraphForm extends JDialog {
     private void confirmButtonActionPerformed() {
         if (validateData()) {
           try {
-        	  String textToUpdate = editField.getText();
+        	  String textToAdd = editField.getText();
         	  int personID = activePerson.getPersonID();
-	          PersonDB.updateParagraph(personID, textToUpdate);
+	          PersonDB.addList(personID, textToAdd);
 	          dispose();
 	      } catch (DBException e) {
 	          e.printStackTrace();
