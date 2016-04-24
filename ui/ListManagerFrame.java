@@ -94,7 +94,7 @@ public class ListManagerFrame extends JDialog {
         JButton deleteButton = new JButton("Delete");
         deleteButton.setToolTipText("Delete selected product");
         deleteButton.addActionListener((ActionEvent) -> {
-//            doDeleteButton();
+            doDeleteButton();
         });
         panel.add(deleteButton);
         
@@ -108,7 +108,38 @@ public class ListManagerFrame extends JDialog {
         return panel;
     }
     
-    private void doEditButton() {
+    private void doDeleteButton() {
+    	int selectedRow = listItemTable.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this,
+                    "No product is currently selected.", 
+                    "No product selected", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int option = JOptionPane.showConfirmDialog(this,
+                    "Are you sure you want to delete this list item? This operation cannot be undone.", 
+                    "Are you sure?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            switch(option) {
+	            case JOptionPane.YES_OPTION:
+	            	ListItem bullet = listTableModel.getItem(selectedRow);
+	            	try {
+						PersonDB.deleteList(bullet.getRowNum());
+						JOptionPane.showMessageDialog(this,
+			                    "The list item was deleted.", 
+			                    "Action complete", JOptionPane.DEFAULT_OPTION);
+					} catch (DBException e) {
+						e.printStackTrace();
+					}
+	            	fireDatabaseUpdatedEvent();
+	            	break;
+	            default:
+	            	break;
+            }
+            
+            
+        }
+	}
+
+	private void doEditButton() {
     	int selectedRow = listItemTable.getSelectedRow();
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(this,

@@ -174,6 +174,18 @@ public class PersonDB {
         } 
 	}
 	
+	public static void deleteList(int row) throws DBException {
+		String query = "DELETE FROM ListItems WHERE RowNum = ?;";
+
+		Connection connection = DBUtil.getConnection();
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, row);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new DBException(e);
+        }	
+	}
+	
 	public static String setHeading(int type) throws DBException, XMLStreamException {
 		String query = "SELECT Heading FROM PageBasics " +
 						"WHERE TypeID = ?;";

@@ -3,20 +3,20 @@ package business;
 public class ListItem {
 
 	
-	int row;
+	int rowNum;
 	int personID;
 	String text;
 	
 	public ListItem() {}
 	
 	public ListItem(int row, int personID, String text) {
-		this.row = row;
+		this.rowNum = row;
 		this.personID = personID;
 		this.text = text;
 	}
 
-	public int getRow() {
-		return row;
+	public int getRowNum() {
+		return rowNum;
 	}
 
 	public int getPersonID() {
@@ -28,7 +28,7 @@ public class ListItem {
 	}
 
 	public void setRow(int row) {
-		this.row = row;
+		this.rowNum = row;
 	}
 
 	public void setPersonID(int personID) {
