@@ -21,7 +21,6 @@ public class PageManagerFrame extends JFrame {
 	JTextArea textArea1;
 	JComboBox<String> personChoices;
 	JRadioButton type1, type2;
-//	ProductTableModel personTableModel;
 	static int type;
 	Person activePerson;
 	String userChoice = "";
@@ -43,7 +42,6 @@ public class PageManagerFrame extends JFrame {
 		int xPos = (dim.width / 2) - (this.getWidth() / 2);
 		int yPos = (dim.height / 2) - (this.getHeight() / 2);
 		this.setLocation(xPos, yPos);
-//      setLocationByPlatform(true);
         setVisible(true);
 	}
 	
@@ -89,10 +87,8 @@ public class PageManagerFrame extends JFrame {
 		});
 				
 		Dimension buttonDim = new Dimension(120, 20);
-//		Dimension buttonBig = new Dimension(20, 20);
 		
 		createButton = new JButton("HTML");
-//		createButton.setPreferredSize(buttonBig);
 		createButton.addActionListener((ActionEvent e) -> {
 			HTMLCreator program = new HTMLCreator();
 			program.runMain(type);
@@ -140,7 +136,6 @@ public class PageManagerFrame extends JFrame {
 		thePanel.add(new JLabel("List Items"), getConstraints(0, 3, GridBagConstraints.WEST));
 		thePanel.add(listEditButton, getConstraints(1, 3, GridBagConstraints.LINE_START));
 		thePanel.add(listAddButton, getConstraints(2, 3, GridBagConstraints.LINE_START));
-//		thePanel.add(listDeleteButton, getConstraints(3, 3, GridBagConstraints.LINE_START));
 		
 		thePanel.add(createButton, bb);
 		
@@ -189,13 +184,6 @@ public class PageManagerFrame extends JFrame {
 		for (Person p : dropdownChoices) {
 			personChoices.addItem(p.getName());
 		}
-	}
-
-	private void add() {
-//    	ProductForm showPeople = new ProductForm(this, "List Items", true);
-//    	listEditForm.setLocationRelativeTo(this);
-//    	listEditForm.setVisible(true);
-//		
 	}
 
 	private GridBagConstraints getConstraints(int x, int y, int anchor) {
