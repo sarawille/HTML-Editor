@@ -34,11 +34,6 @@ public class ListManagerFrame extends JDialog {
     private JButton cancelButton;
 
     private Person activePerson = new Person();
-
-    public ListManagerFrame(java.awt.Frame parent, String title, boolean modal) {
-        super(parent, title, modal);
-        initComponents();
-    }
     
     public ListManagerFrame(java.awt.Frame parent, String title,
             boolean modal, Person person) {
