@@ -6,23 +6,23 @@ import javax.swing.table.AbstractTableModel;
 import javax.xml.stream.XMLStreamException;
 
 import business.ListItem;
-import business.Person;
-import db.PersonDB;
+import business.Section;
+import db.SectionDB;
 import db.DBException;
 
 @SuppressWarnings("serial")
 public class ListTableModel extends AbstractTableModel {
     private List<ListItem> bullets;
-    private Person activePerson;
+    private Section activePerson;
     private static final String[] COLUMN_NAMES = {
         "List Item"
     };
 
     
-    public ListTableModel(Person activePerson) {
+    public ListTableModel(Section activePerson) {
     	this.activePerson = activePerson;
         try {
-            bullets = PersonDB.getListItems(activePerson.getPersonID());
+            bullets = SectionDB.getListItems(activePerson.getSectionID());
         } catch (DBException | XMLStreamException e) {
             e.printStackTrace();
         }
@@ -34,7 +34,7 @@ public class ListTableModel extends AbstractTableModel {
     
     void databaseUpdated() {
         try {
-            bullets = PersonDB.getListItems(activePerson.getPersonID());
+            bullets = SectionDB.getListItems(activePerson.getSectionID());
             fireTableDataChanged();
         } catch (DBException | XMLStreamException e) {
             e.printStackTrace();

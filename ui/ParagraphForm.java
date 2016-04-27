@@ -18,8 +18,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-import db.PersonDB;
-import business.Person;
+import db.SectionDB;
+import business.Section;
 import db.DBException;
 
 
@@ -28,10 +28,10 @@ public class ParagraphForm extends JDialog {
     private JTextArea editField;
     private JButton confirmButton, cancelButton;
 
-    private Person activePerson = new Person();
+    private Section activePerson = new Section();
     
     public ParagraphForm(java.awt.Frame parent, String title,
-            boolean modal, Person person) {
+            boolean modal, Section person) {
     	super(parent, title, modal);      
         this.activePerson = person;
         initComponents();
@@ -65,7 +65,7 @@ public class ParagraphForm extends JDialog {
         editField = new JTextArea();
         String setText = "";
         try {
-        	setText = PersonDB.getParagraph(activePerson.getPersonID());
+        	setText = SectionDB.getParagraph(activePerson.getSectionID());
         }
         catch (DBException e) {
         	e.printStackTrace();
@@ -116,8 +116,8 @@ public class ParagraphForm extends JDialog {
         if (validateData()) {
           try {
         	  String textToUpdate = editField.getText();
-        	  int personID = activePerson.getPersonID();
-	          PersonDB.updateParagraph(personID, textToUpdate);
+        	  int personID = activePerson.getSectionID();
+	          SectionDB.updateParagraph(personID, textToUpdate);
 	          dispose();
 	      } catch (DBException e) {
 	          e.printStackTrace();

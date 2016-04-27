@@ -4,11 +4,12 @@ import java.io.*;
 import java.nio.file.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.stream.*;
 
 import db.DBException;
-import db.PersonDB;
+import db.SectionDB;
 
 
 public class HTMLCreator {
@@ -101,9 +102,9 @@ public class HTMLCreator {
 
 	private static void writeBodyTables() throws XMLStreamException {
 		try {
-			ArrayList<Person> people = PersonDB.getPeople(type);
+			ArrayList<Section> people = SectionDB.getSection(type);
 			writer.writeStartElement("table");
-			for (Person p : people) 
+			for (Section p : people) 
 			{
 				setTableContent(p);
 			}
@@ -118,7 +119,7 @@ public class HTMLCreator {
 	private static void writeHeaderTags() throws XMLStreamException {
 		writer.writeStartElement("h1");
 		try {
-			writer.writeCharacters(PersonDB.setHeading(type));		
+			writer.writeCharacters(SectionDB.setHeading(type));		
 		} 
 		catch (DBException e) 
 		{
@@ -136,7 +137,7 @@ public class HTMLCreator {
 	private static void writeTitleTags() throws XMLStreamException {
 		writer.writeStartElement("title");
 		try {
-			writer.writeCharacters(PersonDB.setTitle(type));				
+			writer.writeCharacters(SectionDB.setTitle(type));				
 		} 
 		catch (DBException e) 
 		{
@@ -148,7 +149,7 @@ public class HTMLCreator {
 	private static void writeParagraphs(int personID) throws XMLStreamException {
 		String paragraph = "";
 		try {
-			paragraph = PersonDB.getParagraph(personID);
+			paragraph = SectionDB.getParagraph(personID);
 		} 
 		catch (DBException e) 
 		{
@@ -160,10 +161,10 @@ public class HTMLCreator {
 		writer.writeCharacters("\n");
 	}
 	
-	public static void writeList(int personID) throws XMLStreamException {
-		ArrayList<String> listItems = new ArrayList<>();
+	public static void writeList(int sectionID) throws XMLStreamException {
+		List<ListItem> listItems = new ArrayList<>();
 		try {
-			listItems = PersonDB.getListItems(personID);
+			listItems = SectionDB.getListItems(sectionID);
 		} 
 		catch (DBException e) 
 		{
@@ -171,16 +172,16 @@ public class HTMLCreator {
 		}
 		writer.writeStartElement("ul");
 		writer.writeCharacters("\n");
-		for (String item : listItems){
+		for (ListItem item : listItems){
 			writer.writeStartElement("li");
-			writer.writeCharacters(item);
+			writer.writeCharacters(item.getText());
 			writeCloseTags();
 			writer.writeCharacters("\n");
 		}
 		writeCloseTags();
 	}
 	
-	private static void setTableContent(Person p) throws XMLStreamException, DBException 
+	private static void setTableContent(Section p) throws XMLStreamException, DBException 
 	{		
 		writer.writeStartElement("tr");
 		writer.writeCharacters("\n");
@@ -215,8 +216,8 @@ public class HTMLCreator {
 		writer.writeStartElement("td");
 		writer.writeAttribute("rowspan", "2");
 		
-		writeParagraphs(p.getPersonID());
-		writeList(p.getPersonID());
+		writeParagraphs(p.getSectionID());
+		writeList(p.getSectionID());
 		
 		writeCloseTags();
 		

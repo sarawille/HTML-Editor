@@ -21,9 +21,9 @@ import javax.swing.ListSelectionModel;
 import javax.swing.WindowConstants;
 
 import business.ListItem;
-import business.Person;
+import business.Section;
 import db.DBException;
-import db.PersonDB;
+import db.SectionDB;
 import ui.ListTableModel;
 
 @SuppressWarnings("serial")
@@ -109,8 +109,8 @@ public class EditListItemForm extends JDialog {
         if (validateData()) {
           try {
         	  String textToUpdate = editField.getText();
-        	  int rowNum = bullet.getRow();
-	          PersonDB.updateList(rowNum, textToUpdate);
+        	  int rowNum = bullet.getRowNum();
+	          SectionDB.updateList(rowNum, textToUpdate);
 	          dispose();
 	          fireDatabaseUpdatedEvent();
 	      } catch (DBException e) {

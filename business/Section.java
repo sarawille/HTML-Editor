@@ -7,35 +7,35 @@ package business;
  *
  */
 
-public class Person {
+public class Section {
 
 	
-	int personID = 0;
+	int sectionID = 0;
 	String name = "";
 	String link = "";
 	String image = "";
 	int TypeID = 0;
 	
-	public Person() {
+	public Section() {
 	}
 	
-	public Person(int typeID) {
+	public Section(int typeID) {
 		setTypeID(typeID);
 	}
 	
-	public Person(int personID, String name, String link, String image, int typeID) {
-		setPersonID(personID);
+	public Section(int sectionID, String name, String link, String image, int typeID) {
+		setSectionID(sectionID);
 		setName(name);
 		setLink(link);
 		setImage(image);
 		setTypeID(typeID);
 	}
 	
-	public int getPersonID() {
-		return personID;
+	public int getSectionID() {
+		return sectionID;
 	}
-	public void setPersonID(int personID) {
-		this.personID = personID;
+	public void setSectionID(int sectionID) {
+		this.sectionID = sectionID;
 	}
 	public String getName() {
 		return name;

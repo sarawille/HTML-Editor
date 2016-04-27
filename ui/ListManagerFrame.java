@@ -24,9 +24,9 @@ import javax.swing.WindowConstants;
 
 import ui.EditListItemForm;
 import business.ListItem;
-import business.Person;
+import business.Section;
 import db.DBException;
-import db.PersonDB;
+import db.SectionDB;
 import ui.ListTableModel;
 
 @SuppressWarnings("serial")
@@ -34,10 +34,10 @@ public class ListManagerFrame extends JDialog {
 	private JTable listItemTable;
 	private ListTableModel listTableModel;
 
-    private Person activePerson = new Person();
+    private Section activePerson = new Section();
     
     public ListManagerFrame(java.awt.Frame parent, String title,
-            boolean modal, Person person) {
+            boolean modal, Section person) {
     	super(parent, title, modal);      
         this.activePerson = person;
         try {
@@ -122,7 +122,7 @@ public class ListManagerFrame extends JDialog {
 	            case JOptionPane.YES_OPTION:
 	            	ListItem bullet = listTableModel.getItem(selectedRow);
 	            	try {
-						PersonDB.deleteList(bullet.getRowNum());
+						SectionDB.deleteList(bullet.getRowNum());
 						JOptionPane.showMessageDialog(this,
 			                    "The list item was deleted.", 
 			                    "Action complete", JOptionPane.DEFAULT_OPTION);

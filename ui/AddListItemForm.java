@@ -18,8 +18,8 @@ import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
 import ui.ListManagerFrame;
-import db.PersonDB;
-import business.Person;
+import db.SectionDB;
+import business.Section;
 import db.DBException;
 
 
@@ -28,10 +28,10 @@ public class AddListItemForm extends JDialog {
     private JTextArea editField;
     private JButton confirmButton, cancelButton;
 
-    private Person activePerson = new Person();
+    private Section activePerson = new Section();
     
     public AddListItemForm(ListManagerFrame listManagerFrame, String title,
-            boolean modal, Person person) {
+            boolean modal, Section person) {
     	super(listManagerFrame, title, modal);      
         this.activePerson = person;
         initComponents();
@@ -109,8 +109,8 @@ public class AddListItemForm extends JDialog {
         if (validateData()) {
           try {
         	  String textToAdd = editField.getText();
-        	  int personID = activePerson.getPersonID();
-	          PersonDB.addList(personID, textToAdd);
+        	  int personID = activePerson.getSectionID();
+	          SectionDB.addList(personID, textToAdd);
 	          dispose();
 	          fireDatabaseUpdatedEvent();
 	      } catch (DBException e) {

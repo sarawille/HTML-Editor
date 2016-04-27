@@ -7,22 +7,22 @@ import javax.swing.*;
 
 import ui.ParagraphForm;
 import db.DBException;
-import db.PersonDB;
+import db.SectionDB;
 import business.HTMLCreator;
-import business.Person;
+import business.Section;
 
 
 public class PageManagerFrame extends JFrame {
 	
 	JButton createButton, paraEditButton, listEditButton, listAddButton, listDeleteButton;
 	JTextArea textArea1;
-	JComboBox<String> personChoices;
+	JComboBox<String> sectionChoices;
 	JRadioButton type1, type2;
 //	ProductTableModel personTableModel;
 	static int type;
-	Person activePerson;
+	Section activeSection;
 	String userChoice = "";
-	ArrayList<Person> dropdownChoices;
+	ArrayList<Section> dropdownChoices;
 	
 	public PageManagerFrame() {
 		try {
@@ -75,13 +75,13 @@ public class PageManagerFrame extends JFrame {
 		bc.gridy = 1;
 		bc.anchor = GridBagConstraints.CENTER;
 
-		personChoices = new JComboBox<String>();
+		sectionChoices = new JComboBox<String>();
 		populateDropdown();
-		personChoices.addActionListener((ActionEvent e) -> {
+		sectionChoices.addActionListener((ActionEvent e) -> {
 			try {
-				Object selectedItem = personChoices.getSelectedItem();
+				Object selectedItem = sectionChoices.getSelectedItem();
 				String choice = selectedItem.toString();
-				activePerson = PersonDB.getPerson(choice);
+				activeSection = SectionDB.getSection(choice);
 			} catch (Exception e1) {}
 		});
 				
@@ -106,18 +106,18 @@ public class PageManagerFrame extends JFrame {
 		paraEditButton = new JButton("Edit");
 		paraEditButton.setPreferredSize(buttonDim);
 		paraEditButton.addActionListener((ActionEvent e) -> {
-			editParagraph(activePerson.getPersonID());
+			editParagraph(activeSection.getSectionID());
 		});
 		
 		listEditButton = new JButton("Edit");
 		listEditButton.setPreferredSize(buttonDim);
 		listEditButton.addActionListener((ActionEvent e) -> {
-			new ListManagerFrame(this, "Edit List", true, activePerson);
+			new ListManagerFrame(this, "Edit List", true, activeSection);
 		});
 		
 		thePanel.add(typeChoice1, getConstraints(0, 0, GridBagConstraints.CENTER));
 		thePanel.add(typeChoice2, getConstraints(1, 0, GridBagConstraints.CENTER));
-		thePanel.add(personChoices, bc);
+		thePanel.add(sectionChoices, bc);
 		
 		thePanel.add(new JLabel("Paragraph"), getConstraints(0, 2, GridBagConstraints.WEST));
 		thePanel.add(paraEditButton, getConstraints(1, 2, GridBagConstraints.LINE_START));
@@ -139,7 +139,7 @@ public class PageManagerFrame extends JFrame {
                     "No item selected", JOptionPane.ERROR_MESSAGE);
         } else {
             ParagraphForm paraForm = 
-                    new ParagraphForm(this, "Edit Paragraph", true, activePerson);
+                    new ParagraphForm(this, "Edit Paragraph", true, activeSection);
             paraForm.setLocationRelativeTo(this);
             paraForm.setVisible(true);
         }
@@ -149,15 +149,15 @@ public class PageManagerFrame extends JFrame {
 		dropdownChoices = new ArrayList<>();
 		
 		try {
-			dropdownChoices = (PersonDB.getPeople(type));
+			dropdownChoices = (SectionDB.getSection(type));
 		} catch (DBException e) {
 			e.printStackTrace();
 		}
-		Person thePerson = new Person(0, "Choose One", "", "", type);
-		dropdownChoices.add(0, thePerson);				//gives an error when selected but no impact to functionality
-		personChoices.removeAllItems();
-		for (Person p : dropdownChoices) {
-			personChoices.addItem(p.getName());
+		Section theSection = new Section(0, "Choose One", "", "", type);
+		dropdownChoices.add(0, theSection);				//gives an error when selected but no impact to functionality
+		sectionChoices.removeAllItems();
+		for (Section p : dropdownChoices) {
+			sectionChoices.addItem(p.getName());
 		}
 	}
 

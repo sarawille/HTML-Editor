@@ -4,14 +4,14 @@ public class ListItem {
 
 	
 	int rowNum;
-	int personID;
+	int sectionID;
 	String text;
 	
 	public ListItem() {}
 	
 	public ListItem(int row, int personID, String text) {
 		this.rowNum = row;
-		this.personID = personID;
+		this.sectionID = personID;
 		this.text = text;
 	}
 
@@ -19,8 +19,8 @@ public class ListItem {
 		return rowNum;
 	}
 
-	public int getPersonID() {
-		return personID;
+	public int getSectionID() {
+		return sectionID;
 	}
 
 	public String getText() {
@@ -31,8 +31,8 @@ public class ListItem {
 		this.rowNum = row;
 	}
 
-	public void setPersonID(int personID) {
-		this.personID = personID;
+	public void setSectionID(int personID) {
+		this.sectionID = personID;
 	}
 
 	public void setText(String text) {

@@ -12,17 +12,17 @@ import javax.xml.stream.XMLStreamException;
 import db.DBException;
 import db.DBUtil;
 import business.ListItem;
-import business.Person;
+import business.Section;
 
-public class PersonDB {
+public class SectionDB {
 	
-	public static List<ListItem> getListItems(int personID) throws XMLStreamException, DBException {
-		String query = "SELECT * FROM ListItems WHERE PersonID = ?;";
+	public static List<ListItem> getListItems(int sectionID) throws XMLStreamException, DBException {
+		String query = "SELECT * FROM ListItems WHERE SectionID = ?;";
 		List<ListItem> listItems = new ArrayList<>();
 		Connection connection = DBUtil.getConnection();
 		try (PreparedStatement statement = connection.prepareStatement(query))
 		{
-			statement.setInt(1, personID);
+			statement.setInt(1, sectionID);
 			ResultSet rs = statement.executeQuery();
 			while(rs.next())
 			{
@@ -31,7 +31,7 @@ public class PersonDB {
 				ListItem bullet = new ListItem();
 				bullet.setRow(row);
 				bullet.setText(text);
-				bullet.setPersonID(personID);
+				bullet.setSectionID(sectionID);
 				listItems.add(bullet);
 			}
 		}
@@ -42,14 +42,14 @@ public class PersonDB {
 		return listItems;
 	}
 	
-	public static String getParagraph(int personID) throws DBException {
+	public static String getParagraph(int sectionID) throws DBException {
 		String para = "";
-		String query = "SELECT * FROM Paragraph WHERE PersonID = ?;";
+		String query = "SELECT * FROM Paragraph WHERE SectionID = ?;";
 
 		Connection connection = DBUtil.getConnection();
 		try (PreparedStatement statement = connection.prepareStatement(query))
 		{
-			statement.setInt(1,  personID);
+			statement.setInt(1,  sectionID);
 			ResultSet rs = statement.executeQuery();
 			while(rs.next()){
 				para = rs.getString("Text");
@@ -62,47 +62,47 @@ public class PersonDB {
 		return para;
 	}
 
-	public static ArrayList<Person> getPeople(int type) throws DBException
+	public static ArrayList<Section> getSection(int type) throws DBException
 	{
-		ArrayList<Person> people = new ArrayList<>();
-		String query = "SELECT * FROM Person WHERE TypeID = ?;";
+		ArrayList<Section> sections = new ArrayList<>();
+		String query = "SELECT * FROM Section WHERE TypeID = ?;";
 		Connection connection = DBUtil.getConnection();
 		try (PreparedStatement statement = connection.prepareStatement(query)) 
 		{
 			statement.setInt(1,  type);
 			ResultSet rs = statement.executeQuery();
 			while(rs.next()) {
-				int personID = rs.getInt("PersonID");
-				String name = rs.getString("PersonName");
+				int sectionID = rs.getInt("SectionID");
+				String name = rs.getString("Name");
 				String link = rs.getString("Link");
 				String image = rs.getString("Image");
 				
-				Person thePerson = new Person(personID, name, link, image, type);
-				people.add(thePerson);
+				Section theSection = new Section(sectionID, name, link, image, type);
+				sections.add(theSection);
 			}
-			return people;
+			return sections;
 		} 
 		catch (SQLException e) {
 			throw new DBException();
 		}
 	}
 	
-	public static Person getPerson(String name) throws DBException
+	public static Section getSection(String name) throws DBException
 	{
-		String query = "SELECT * FROM Person WHERE PersonName = ?;";
+		String query = "SELECT * FROM Section WHERE Name = ?;";
 		Connection connection = DBUtil.getConnection();
 		try (PreparedStatement statement = connection.prepareStatement(query)) 
 		{
 			statement.setString(1,  name);
 			ResultSet rs = statement.executeQuery();
 			rs.next();
-			int personID = rs.getInt("PersonID");
+			int sectionID = rs.getInt("SectionID");
 			String link = rs.getString("Link");
 			String image = rs.getString("Image");
 			int type = rs.getInt("TypeID");
 			
-			Person thePerson = new Person(personID, name, link, image, type);
-			return thePerson;
+			Section theSection = new Section(sectionID, name, link, image, type);
+			return theSection;
 			
 		} 
 		catch (SQLException e) {
@@ -110,16 +110,16 @@ public class PersonDB {
 		}
 	}
 
-	public static String getPersonInfo(int personID) throws DBException {
-		String query = "SELECT Paragraph.Text FROM Person " +
+	public static String getPersonInfo(int sectionID) throws DBException {
+		String query = "SELECT Paragraph.Text FROM Section " +
 						"JOIN Paragraph " +
-						"ON Person.PersonID = Paragraph.PersonID " +
-						"WHERE Person.PersonID = ?;";
+						"ON Section.SectionID = Paragraph.SectionID " +
+						"WHERE Section.SectionID = ?;";
 
 		Connection connection = DBUtil.getConnection();
 		try (PreparedStatement ps = connection.prepareStatement(query))
 		{
-			ps.setInt(1, personID);
+			ps.setInt(1, sectionID);
 			ResultSet rs = ps.executeQuery();
 			rs.next();
 			String text = rs.getString("Text");
@@ -131,13 +131,13 @@ public class PersonDB {
 		}
 	}
 	
-	public static void updateParagraph(int personID, String text) throws DBException {
-		String query = "UPDATE Paragraph SET Text = ? WHERE PersonID = ?;";
+	public static void updateParagraph(int sectionID, String text) throws DBException {
+		String query = "UPDATE Paragraph SET Text = ? WHERE SectionID = ?;";
 
 		Connection connection = DBUtil.getConnection();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, text);
-            ps.setInt(2, personID);
+            ps.setInt(2, sectionID);
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new DBException(e);
@@ -145,13 +145,13 @@ public class PersonDB {
 	}
 	
 
-	public static void addList(int personID, String text) throws DBException {
-		String query = "INSERT INTO ListItems (PersonID, Text) " + 
+	public static void addList(int sectionID, String text) throws DBException {
+		String query = "INSERT INTO ListItems (SectionID, Text) " + 
 						"VALUES (?, ?);";
 
 		Connection connection = DBUtil.getConnection();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setInt(1, personID);
+            ps.setInt(1, sectionID);
             ps.setString(2, text);
             ps.executeUpdate();
         } catch (SQLException e) {
