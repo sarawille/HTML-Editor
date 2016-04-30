@@ -17,30 +17,20 @@ public class HTMLCreator {
 	static String style =  "h1 {" +
 			"margin-left:50px;" +
 			"margin-right:30px;" +
-			"color:hotpink;" +
 			"text-align:center;" +
 			"}h4{" +
 			"text-align:center;" +
 			"font-size:150%;" +	
-			"}body{"+
-			"background-color:black;" +
-			"color:white;" +
 			"}p{" +
 			"margin-left:50px;" +
 			"margin-right:30px;" +
 			"text-align:left;" +
-			"color:white;" +
 			"font-size:105%;" +
 			"}ul{" +
 			"margin-left:50px;" +
 			"margin-right:50px;" +
 			"text-align:left;" +
-			"color:white;" +
 			"font-size:95%;" +
-			"}strong{" +
-			"color:green;" +
-			"}em {" +
-			"color:orange;" +
 			"}img{" +
 			"margin-left:50px;" +	
 			"align:center;" +
@@ -48,11 +38,8 @@ public class HTMLCreator {
 			"border-spacing: 5px;" +
 			"text-align:center;" +
 			"width:100%;" +
-			"}" +
-			"tr {" +
-			"color:white;" +
 			"}";
-
+			
 	static XMLStreamWriter writer;
 	static int type;
 	
@@ -185,14 +172,10 @@ public class HTMLCreator {
 	{		
 		writer.writeStartElement("tr");
 		writer.writeCharacters("\n");
-		
 		writer.writeStartElement("td");
-		writeCloseTags();
-		
-		writer.writeStartElement("td");
+		writer.writeAttribute("colspan", "3");
 		writer.writeCharacters("\n");
 		writer.writeStartElement("h4");
-		writer.writeAttribute("style", "text-align: center;");
 		writer.writeStartElement("a");
 		writer.writeAttribute("href", p.getLink());
 		writer.writeCharacters(p.getName());

@@ -40,6 +40,7 @@ public class PageManagerFrame extends JFrame {
 		int xPos = (dim.width / 2) - (this.getWidth() / 2);
 		int yPos = (dim.height / 2) - (this.getHeight() / 2);
 		this.setLocation(xPos, yPos);
+		this.setSize(300, 200);
         setVisible(true);
 	}
 	
@@ -49,14 +50,14 @@ public class PageManagerFrame extends JFrame {
 		thePanel.setLayout(new GridBagLayout());
 		
 		JRadioButton typeChoice1 = new JRadioButton();
-		typeChoice1.setText("Hero");
+		typeChoice1.setText("Experiences");
 		typeChoice1.addActionListener((ActionEvent  e) -> {
 			type = 1;
 			populateDropdown();
 		});
 		
 		JRadioButton typeChoice2 = new JRadioButton();
-		typeChoice2.setText("Villain");
+		typeChoice2.setText("Meals");
 		typeChoice2.addActionListener((ActionEvent  e) -> {
 			type = 2;
 			populateDropdown();
