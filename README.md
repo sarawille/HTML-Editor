@@ -5,6 +5,8 @@
 I completed this project as part of the classwork at Cincy Code IT Java bootcamp.  It implements what I've learned about JDBC, MySQL, Swing, SAX and HTML.
 
 ##Project Set-Up
+Before beginning, open and execute the SQL script in MySQL.  Add the MySQL JAR (found in lib/) to Java Build Path > Libraries in your project.
+
 Run ui/Main.java to open the GUI.  
 
 Select one of the radio buttons to select the topic for the page.  In the example script, the database is set up to display information about Experience or Food.
