@@ -64,7 +64,7 @@ public class EditListItemForm extends JDialog {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);     
         
         
-        Dimension longField = new Dimension(400, 200);
+        Dimension longField = new Dimension(200, 100);
      
         editField = new JTextArea();
         editField.setPreferredSize(longField);
