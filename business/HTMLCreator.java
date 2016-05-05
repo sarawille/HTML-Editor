@@ -45,7 +45,7 @@ public class HTMLCreator {
 	
 	public void runMain(int type) {
 		this.type = type;
-		String fileString = "indexCopy.html";
+		String fileString = "index.html";
 		Path filePath = Paths.get(fileString);
 		try {
 			if (Files.notExists(filePath))
@@ -175,12 +175,7 @@ public class HTMLCreator {
 		writer.writeStartElement("td");
 		writer.writeAttribute("colspan", "3");
 		writer.writeCharacters("\n");
-		writer.writeStartElement("h4");
-		writer.writeStartElement("a");
-		writer.writeAttribute("href", p.getLink());
-		writer.writeCharacters(p.getName());
-		writeCloseTags();			//end a href
-		writeCloseTags();			//end h4
+		
 		writeCloseTags();			//end td
 		
 		writer.writeStartElement("td");
@@ -193,11 +188,17 @@ public class HTMLCreator {
 		writer.writeStartElement("td");
 		writer.writeStartElement("img");
 		writer.writeAttribute("src", p.getImage());
-		writer.writeAttribute("width", "200");
+		writer.writeAttribute("height", "267");
 		writeCloseTags();
 		
 		writer.writeStartElement("td");
 		writer.writeAttribute("rowspan", "2");
+		writer.writeStartElement("h4");
+		writer.writeStartElement("a");
+		writer.writeAttribute("href", p.getLink());
+		writer.writeCharacters(p.getName());
+		writeCloseTags();			//end a href
+		writeCloseTags();			//end h4
 		
 		writeParagraphs(p.getSectionID());
 		writeList(p.getSectionID());
