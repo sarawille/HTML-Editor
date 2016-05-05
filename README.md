@@ -13,5 +13,7 @@ Choose which section to edit from the drop-down menu.  You can edit the paragrap
 
 When your editing is complete, click the "HTML" button to generate a web page from the information saved in the database on that topic.  The page will be saved as "index.html" in the project folder.
 
+For an example of a full webpage I created with the tool, please see <a href="https://github.com/sarawille/HTML-Editor/blob/master/ExperiencesExample.html">ExperienceExample.html</a>.
+
 ##Author
 <a href="http://www.linkedin.com/in/sarawille">Sara Wille</a>
